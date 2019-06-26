@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import Form from '../Form'
 
 
 export default class Main extends Component {
   state = {
-    post : [
+    isPosting : true,
+    posts : [
       {
         title : 'My Day',
         author : 'Omar',
@@ -15,30 +17,39 @@ export default class Main extends Component {
 
   handleClick = event => {
     this.setState({
-      name: "Not Andrew"
+      isPosting : !this.state.isPosting
     });
   };
 
+  handleAddPost =({title, author, post})=> {
+    this.setState({
+      posts : [{title, author, post}, ...this.state.posts]
+    })
+  }
+
   render() {
-    const posts = this.state.post.map((post, idex) => {
+
+    const postsList = this.state.posts.map((post, index) => {
       return (
         
-      <li>
+      <li key={index}>
         <h3>{post.title}</h3>
+        <h5>{post.author}</h5>
+        <h6>{post.post}</h6>
       </li>  
       )
     })
 
     return (
       <div>
-        <heading>
+        <header>
 
         <h1>Party Blog</h1>
-        </heading>
+        </header>
         <section>
-          <ul>
-            {posts}
-          </ul>
+          <button onClick={this.handleClick}>toggle</button>
+          {!!this.state.isPosting ? <Form handleAddPost={this.handleAddPost} />: null}
+          <ul>{postsList}</ul>
         </section>
        
       </div>
