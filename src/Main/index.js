@@ -27,6 +27,14 @@ export default class Main extends Component {
     })
   }
 
+  handleDeletePost = postIdx => {
+    //we cannot mutate state directly
+    const newStateArray = this.state.posts
+    .filter((elem, idx) => idx !== postIdx);
+
+    this.setState({ posts: newStateArray });
+  }
+
   render() {
 
     const postsList = this.state.posts.map((post, index) => {
@@ -36,6 +44,7 @@ export default class Main extends Component {
         <h3>{post.title}</h3>
         <h5>{post.author}</h5>
         <h6>{post.post}</h6>
+        <button onClick={() => this.handleDeletePost(index)}>Delete</button>
       </li>  
       )
     })
@@ -48,7 +57,9 @@ export default class Main extends Component {
         </header>
         <section>
           <button onClick={this.handleClick}>toggle</button>
-          {!!this.state.isPosting ? <Form handleAddPost={this.handleAddPost} />: null}
+          {!!this.state.isPosting ? (
+          <Form handleAddPost={this.handleAddPost} />
+          ): null}
           <ul>{postsList}</ul>
         </section>
        
