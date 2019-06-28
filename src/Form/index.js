@@ -18,31 +18,43 @@ export default class Form extends Component {
     console.log('form index.js line 18 this event fired')
     event.preventDefault()
     this.props.handleAddPost(this.state)
+    this.setState({
+      title: '',
+      author: '',
+      post: ''
+    })
   }
   render() {
-    /** TODO : form goes here and we need the following imputs
-     * title, author, and post
-     */
+
     return (
 
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <div className='row'>
+
+          <div className='six columns'>
+
             <label>Title</label>
             <input 
+              className='u-full-width'
               onChange={this.handleChange} 
               name='title' 
               value={this.state.title} />
-        </div>
-        <div>
+          </div>
+        
+          <div className='six columns'>
+
               <label>Author</label>
               <input 
+              className='u-full-width'
               onChange={this.handleChange} 
               name='author' 
               value={this.state.author} />
+          </div>
         </div>
         <div>
             <label>Post</label>
-            <input 
+            <textarea 
+              className='u-full-width'
               onChange={this.handleChange} 
               name='post' 
               value={this.state.post} />
