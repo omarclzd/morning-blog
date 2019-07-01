@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form from '../Form'
+import BlogPost from '../BlogPost'
 
 
 export default class Main extends Component {
@@ -40,12 +41,7 @@ export default class Main extends Component {
     const postsList = this.state.posts.map((post, index) => {
       return (
         
-      <li key={index}>
-        <h3>{post.title}</h3>
-        <h5>{post.author}</h5>
-        <h6>{post.post}</h6>
-        <button onClick={() => this.handleDeletePost(index)}>Delete</button>
-      </li>  
+        <BlogPost post={post} key={index} index={index} handleDeletePost={this.handleDeletePost}/>
       )
     })
 
